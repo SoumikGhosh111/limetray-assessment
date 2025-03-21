@@ -48,12 +48,43 @@ form {
 ul {
     list-style: none;
     padding: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 300px;
     padding: 0.5rem 0rem;
 }
+.no-tasks{ 
+    text-align: center;
+}
+.no-tasks img {
+    width: 300px;
+    height: 300px;
+    opacity: 1 !important; /* Ensure opacity stays at 1 */
+    animation: floatAnimation 2s ease-in-out alternate infinite;
+    margin-bottom: 1rem;
+}
 
-@media screen and (max-width: 768px){ 
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(5%);
+    }
+    100% {
+        transform: translateY(-5%);
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(5%);
+    }
+    100% {
+        transform: translateY(10%);
+    }
+}
+@media screen and (max-width: 768px){   
     .task-container{ 
         flex-direction: column;
         align-items: center;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities';
 import { useTasks } from '../../context/TaskContext';
@@ -14,22 +14,25 @@ const Task = ({ task, id }) => {
         transition,
         cursor: 'grab'
     }
+
+    const handleToggle = useCallback(() => toggleCompleted(task?.id), [toggleCompleted, task?.id]);
+  const handleRemove = useCallback(() => removeTask(task?.id), [removeTask, task?.id]);
     return (
         <li  ref={setNodeRef} style={style} {...attributes} {...listeners}>
             <div className={`task ${task.completed ? "completed" : ""}`}>
                 <input
                     type="checkbox"
                     checked={task.completed}
-                    onChange={() => toggleCompleted(task?.id)}
+                    onChange={handleToggle}
                     onPointerDown={(e) => e.stopPropagation()}
                     className="task-checkbox"
                 />
                 <span>{task?.text}</span>
             </div>
-            <button className="remove-btn" onClick={() => removeTask(task?.id)} onPointerDown={(e) => e.stopPropagation()}><RiDeleteBin6Line />
+            <button className="remove-btn" onClick={handleRemove} onPointerDown={(e) => e.stopPropagation()}><RiDeleteBin6Line />
             </button>
         </li>
     )
 }
 
-export default Task
+export default React.memo(Task); 
