@@ -47,7 +47,7 @@ const TaskManager = () => {
     const sensors = useSensors(
         useSensor(TouchSensor, {
             activationConstraint: {
-                // delay: 250,  // Prevent accidental drags
+                delay: 150,  // Prevent accidental drags
                 tolerance: 5, // Allow small movements before triggering drag
             },
         }),
